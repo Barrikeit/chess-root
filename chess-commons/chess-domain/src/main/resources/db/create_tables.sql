@@ -6,27 +6,27 @@
 -- Table: usuarios
 CREATE TABLE users
 (
-    id                bigserial    NOT NULL,               -- identificador del usuario
-    code              uuid         NOT NULL,               -- código único del usuario
-    username          VARCHAR(50)  NOT NULL,               -- usuario de registro
-    name              VARCHAR(50)  NOT NULL,               -- nombre real
-    surname1          VARCHAR(50)  NOT NULL,               -- apellido 1 real
-    surname2          VARCHAR(50) NULL,                    -- aprellido 2 real
-    email             VARCHAR(100) NOT NULL,               -- email de registro y método de contacto
-    phone             VARCHAR(50) NULL,                    -- para posible verificación en 2 pasos
-    password          VARCHAR(255) NULL,                   -- contraseña de registro hasheada
-    id_location       bigint NULL,                         -- identificador del pais para bandera
-    elo               VARCHAR(100) NULL,                   -- ELO rating
-    id_rank           bigint NULL,                         -- Rango
-    registered        boolean      NOT NULL DEFAULT FALSE, -- si está registrado (0: no, 1: si)
-    registration_code VARCHAR(255) NULL,                   -- token para habilitar
-    registration_date TIMESTAMP WITH TIME ZONE NULL,       -- fecha y hora del registro
-    logged            boolean      NOT NULL DEFAULT FALSE, -- si está logeado (0: no, 1: si)
-    login_attempts    VARCHAR(255) NOT NULL,               -- cantidad de intentos mas de 'x' sin acertar bloquea la cuenta
-    login_date        TIMESTAMP WITH TIME ZONE NULL,       -- fecha y hora del ultimo acceso
-    banned            boolean      NOT NULL DEFAULT FALSE, -- si esta banneado (0: no, 1: si)
-    ban_date          TIMESTAMP WITH TIME ZONE NULL,       -- fecha y hora del baneo
-    ban_reason        VARCHAR(255) NULL                    -- razón del baneo
+    id                bigserial                NOT NULL,               -- identificador del usuario
+    code              UUID                     NOT NULL,               -- código único del usuario
+    username          VARCHAR(50)              NOT NULL,               -- usuario de registro
+    name              VARCHAR(50)              NOT NULL,               -- nombre real
+    surname1          VARCHAR(50)              NOT NULL,               -- apellido 1 real
+    surname2          VARCHAR(50)              NULL,                   -- aprellido 2 real
+    email             VARCHAR(100)             NOT NULL,               -- email de registro y método de contacto
+    phone             VARCHAR(50)              NULL,                   -- para posible verificación en 2 pasos
+    password          VARCHAR(255)             NULL,                   -- contraseña de registro hasheada
+    id_location       bigint                   NULL,                   -- identificador del pais para bandera
+    elo               VARCHAR(100)             NULL,                   -- ELO rating
+    id_rank           bigint                   NULL,                   -- Rango
+    registered        boolean                  NOT NULL default false, -- si está registrado (0: no, 1: si)
+    registration_code VARCHAR(255)             NULL,                   -- token para habilitar
+    registration_date TIMESTAMP WITH TIME ZONE NULL,                   -- fecha y hora del registro
+    logged            boolean                  NOT NULL default false, -- si está logeado (0: no, 1: si)
+    login_attempts    VARCHAR(255)             NOT NULL,               -- cantidad de intentos mas de 'x' sin acertar bloquea la cuenta
+    login_date        TIMESTAMP WITH TIME ZONE NULL,                   -- fecha y hora del ultimo acceso
+    banned            boolean                  NOT NULL default false, -- si esta banneado (0: no, 1: si)
+    ban_date          TIMESTAMP WITH TIME ZONE NULL,                   -- fecha y hora del baneo
+    ban_reason        VARCHAR(255)             NULL                    -- razón del baneo
 );
 
 -- Table: amistades
@@ -73,12 +73,12 @@ CREATE TABLE users_roles
 CREATE TABLE games
 (
     id         bigserial                NOT NULL, -- identificador de la partida
-    code       uuid                     NOT NULL, -- código único de la partida
+    code       UUID                     NOT NULL, -- código único de la partida
     start_date TIMESTAMP WITH TIME ZONE NOT NULL, -- fecha y hora del comienzo de la partida
     end_date   TIMESTAMP WITH TIME ZONE NULL,     -- fecha y hora del final de la partida
     pgn        VARCHAR(255)             NOT NULL, -- listado de movimientos
     fen        VARCHAR(255)             NOT NULL, -- estado del tablero
-    id_state   bigint                   NOT NULL, -- identificador del estado de la partida
+    id_state   VARCHAR(20)              NOT NULL, -- identificador del estado de la partida
     id_event   bigint                   NOT NULL  -- evento
 );
 
@@ -95,7 +95,7 @@ CREATE TABLE games_users_colors
 CREATE TABLE game_states
 (
     id           bigserial    NOT NULL, -- identificador del estado de la partida
-    code         VARCHAR(6)   NOT NULL, -- abreviatura del estado de la partida 1-0, 0-1, 1/2-1/2, 0-0
+    code         VARCHAR(255) NOT NULL, -- abreviatura del estado de la partida 1-0, 0-1, 1/2-1/2, 0-0
     state        VARCHAR(255) NOT NULL, -- estado de la partida
     observations VARCHAR(255) NOT NULL  -- informacion extra para el estado de la partida (ganan blancas, por rendicion)
 );
@@ -116,6 +116,6 @@ CREATE TABLE events
     name        VARCHAR(255)             NOT NULL, -- nombre del evento
     start_date  TIMESTAMP WITH TIME ZONE NOT NULL, -- fecha y hora del comienzo del evento
     end_date    TIMESTAMP WITH TIME ZONE NULL,     -- fecha y hora del final del evento
-    round       VARCHAR(2) NULL,                   -- ronda
+    round       bigint                   NOT NULL, -- ronda
     id_location bigint                   NOT NULL  -- identificador de la ubicacion del evento
 );
