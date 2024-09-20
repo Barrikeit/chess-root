@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="es">
+<body>
+<span th:fragment="userData"
+      th:utext="#{mail.body.datos} +
+      '<br/>Usuario: ' + ${user.getUsername()} +
+       '<br/>Nombre: ' + ${user.getNombre()} +
+        '<br/>Apellidos: ' + ${user.getSurname1()} + ' ' + ${user.getSurname2()} +
+         '<br/>Email: ' + ${user.getEmail()} +
+          '<br/>Telefono: ' + ${user.getPhone()}">
+</span>
+</body>
+</html>

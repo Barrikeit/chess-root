@@ -1,11 +1,10 @@
 package org.barrikeit.core.util.enums;
 
-import org.barrikeit.core.util.SelectOption;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.barrikeit.core.util.SelectOption;
 
 public enum ColorEnum {
   B(1, "B", "Black"),

@@ -90,19 +90,16 @@
                 <groupId>org.barrikeit</groupId>
                 <artifactId>chess-parent</artifactId>
                 <version>${app.version}</version>
-                <type>jar</type>
             </dependency>
             <dependency>
                 <groupId>org.barrikeit</groupId>
                 <artifactId>chess-data-jpa</artifactId>
                 <version>${app.version}</version>
-                <type>jar</type>
             </dependency>
             <dependency>
                 <groupId>org.barrikeit</groupId>
                 <artifactId>chess-commons</artifactId>
                 <version>${app.version}</version>
-                <type>jar</type>
             </dependency>
 
             <!-- IMPORTED DEPENDENCIES -->

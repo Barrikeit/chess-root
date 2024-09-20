@@ -5,11 +5,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-import java.io.Serial;
-import java.time.LocalDateTime;
-import java.util.UUID;
-
 import jakarta.validation.constraints.Size;
+import java.io.Serial;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

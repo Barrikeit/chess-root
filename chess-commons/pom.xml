@@ -21,33 +21,33 @@
         <module>chess-openfeign</module>
     </modules>
 
-    <dependencies>
-        <!-- CHESS COMMONS DEPENDENCIES -->
-        <dependency>
-            <groupId>org.barrikeit</groupId>
-            <artifactId>chess-base</artifactId>
-            <version>0.0.1</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>org.barrikeit</groupId>
-            <artifactId>chess-domain</artifactId>
-            <version>${app.version}</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>org.barrikeit</groupId>
-            <artifactId>chess-security</artifactId>
-            <version>${app.version}</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>org.barrikeit</groupId>
-            <artifactId>chess-openfeign</artifactId>
-            <version>${app.version}</version>
-            <type>jar</type>
-        </dependency>
+    <dependencyManagement>
+        <dependencies>
+            <!-- CHESS COMMONS DEPENDENCIES -->
+            <dependency>
+                <groupId>org.barrikeit</groupId>
+                <artifactId>chess-base</artifactId>
+                <version>${app.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.barrikeit</groupId>
+                <artifactId>chess-domain</artifactId>
+                <version>${app.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.barrikeit</groupId>
+                <artifactId>chess-security</artifactId>
+                <version>${app.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.barrikeit</groupId>
+                <artifactId>chess-openfeign</artifactId>
+                <version>${app.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
+    <dependencies>
         <!-- SPRINGFRAMEWORK DEPENDENCIES -->
         <dependency>
             <groupId>org.springframework</groupId>
