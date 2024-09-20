@@ -1,6 +1,10 @@
 package org.barrikeit.core.util.enums;
 
+import org.barrikeit.core.util.SelectOption;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public enum ColorEnum {
@@ -33,5 +37,16 @@ public enum ColorEnum {
 
   public static ColorEnum valueOfCodeColor(String codeColor) {
     return BY_CODE_COLOR.get(codeColor);
+  }
+
+
+  public static List<SelectOption> getOptions() {
+    final ArrayList<SelectOption> options = new ArrayList<>();
+
+    for (final ColorEnum option : ColorEnum.values()) {
+      options.add(new SelectOption(option.color, option.name()));
+    }
+
+    return options;
   }
 }
