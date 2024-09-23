@@ -1,0 +1,68 @@
+server:
+  port: 2345
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+  security:
+    user:
+      name: barrikeit-security
+      password: barrikeit-security
+  datasource:
+    url: "jdbc:postgresql://localhost:2345/barrikeit"
+    driverClassName: org.postgresql.Driver
+    username: chess
+    password: "ajedrezillo"
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+      minimumIdle: 2
+      maximumPoolSize: 10
+      datasource-properties:
+        includeSynonyms: false
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        synonyms: false
+        format_sql: true
+    show-sql: true
+  flyway:
+    enabled: false
+
+barrikeit:
+  application:
+    cors:
+      allowed:
+        methods: GET,HEAD,POST,PUT,DELETE
+        headers: "Authorization,content-type,x-aei-called-service,x-aei-session"
+        origins: http://localhost:2345
+      enabled: true
+      path:
+        pattern: /**
+  authorization:
+    jwt:
+      issuer: barrikeit
+      secret: barrikeit_secret
+      expiration-in-sec: 3600
+      expiration-refresh-in-sec: 4500
+    app-validator-filter:
+      app-self-name: 'lbda-mcd'
+      app-header-name: 'x-aei-called-service'
+      app-header-name-validation-Filter: true
+      app-security-name: 'barrikeit-security'
+
+mail:
+  host: smtp.ttec.es
+  port: 26
+  user: barrikeit
+  pass: barrikeit
+  from: no-reply@ajedrezillo.es
+  properties:
+    protocol: smtp
+    auth: true
+    starttls: true
+    debug: true
+  url: http://localhost:2345/barrikeit

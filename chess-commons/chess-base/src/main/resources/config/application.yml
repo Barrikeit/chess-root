@@ -1,0 +1,45 @@
+barrikeit:
+  application:
+    name: ajedrezillo
+    version: v1
+    title: ajedrezillo
+    description: chess server
+    timeZone: Europe/Madrid
+spring:
+  batch:
+    jdbc:
+      initialize-schema: always
+    job:
+      enabled: false
+  profiles:
+    active: @spring.profiles.active@
+  config:
+    import:
+      - application-base.yml
+      - application-@spring.profiles.active@.yml
+  application.name: ajedrezillo
+  mvc.servlet.path: /chess/v1
+  flyway:
+    enabled: false
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+springdoc:
+  api-docs.path: /openapi/api-docs
+  packagesToScan: org.barrikeit
+  show-actuator: false
+  swagger-ui:
+    display-request-duration: true
+    filter: true
+    operations-sorter: method
+    path: /openapi/swagger-ui
+    use-root-path: true
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+
+feign:
+  autoconfiguration:
+    jackson:
+      enabled : true
