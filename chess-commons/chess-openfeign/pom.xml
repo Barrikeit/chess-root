@@ -19,6 +19,12 @@
     </build>
 
     <dependencies>
+        <!-- Chess dependencies -->
+        <dependency>
+            <groupId>org.barrikeit</groupId>
+            <artifactId>chess-security</artifactId>
+        </dependency>
+
         <!-- Spring dependencies -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

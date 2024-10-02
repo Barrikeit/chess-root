@@ -2,7 +2,13 @@ package org.barrikeit.core.util;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.AllArgsConstructor;
 
 @Getter
 @Setter
-public record SelectOption(String label, Object value) {}
+@AllArgsConstructor
+public class SelectOption {
+    private String label;
+    private Object value;
+}
+

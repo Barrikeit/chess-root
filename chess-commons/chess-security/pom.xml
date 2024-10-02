@@ -19,6 +19,12 @@
     </build>
 
     <dependencies>
+        <!-- Chess dependencies -->
+        <dependency>
+            <groupId>org.barrikeit</groupId>
+            <artifactId>chess-base</artifactId>
+        </dependency>
+
         <!-- Spring dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

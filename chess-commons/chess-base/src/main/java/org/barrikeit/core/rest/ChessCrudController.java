@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * Controlador CRUD genérico para la entidad Lbda. Esta clase abstracta se utiliza para implementar
- * operaciones CRUD estándar en la entidad Lbda.
+ * Controlador CRUD genérico para la entidad Chess. Esta clase abstracta se utiliza para implementar
+ * operaciones CRUD estándar en la entidad Chess.
  *
- * <p>Parámetros de tipo: T - Tipo de la entidad Lbda. K - Tipo del identificador de la entidad
- * Lbda. D - Tipo del DTO base de la entidad Lbda. F - Tipo del filtro base para la búsqueda de la
- * entidad Lbda.
+ * <p>Parámetros de tipo: T - Tipo de la entidad Chess. K - Tipo del identificador de la entidad
+ * Chess. D - Tipo del DTO base de la entidad Chess. F - Tipo del filtro base para la búsqueda de la
+ * entidad Chess.
  *
  * @author shiraly
  */
@@ -34,15 +34,15 @@ public abstract class ChessCrudController<
         F extends BaseFilter>
     implements ChessCrudApi<D> {
 
-  // Servicio CRUD para la entidad Lbda.
+  // Servicio CRUD para la entidad Chess.
   private final ChessCrudService<T, K, D, F> service;
 
   /**
-   * Método para buscar todas las entidades Lbda.
+   * Método para buscar todas las entidades Chess.
    *
    * @param page - Información de paginación para la búsqueda.
    * @param unpaged - Indica si la búsqueda debe ser paginada o no.
-   * @param search - Cadena de búsqueda para filtrar las entidades Lbda.
+   * @param search - Cadena de búsqueda para filtrar las entidades Chess.
    * @return ResponseEntity con la página de resultados de la búsqueda.
    */
   @GetMapping

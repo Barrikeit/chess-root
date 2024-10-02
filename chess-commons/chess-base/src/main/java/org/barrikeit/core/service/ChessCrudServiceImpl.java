@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.barrikeit.core.domain.BaseEntity;
+import org.barrikeit.core.domain.ChessEntity;
 import org.barrikeit.core.error.BadRequestException;
 import org.barrikeit.core.repository.ChessCrudRepository;
 import org.barrikeit.core.rest.mapper.BaseMapper;
@@ -26,9 +27,9 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.ObjectUtils;
 
 /**
- * Esta es la clase LbdaCrudServiceImpl que extiende de LbdaBaseServiceImpl e implementa
- * LbdaCrudService. Esta clase proporciona la implementación de los métodos CRUD para las entidades
- * Lbda.
+ * Esta es la clase ChessCrudServiceImpl que extiende de BaseServiceImpl e implementa
+ * ChessCrudService. Esta clase proporciona la implementación de los métodos CRUD para las entidades
+ * Base.
  *
  * <p>Parámetros de tipo: T - Representa la entidad que se va a manejar en el servicio. K -
  * Representa el tipo de la clave primaria de la entidad. D - Representa el DTO asociado a la
@@ -39,7 +40,7 @@ import org.springframework.util.ObjectUtils;
  * entidad y su DTO correspondiente.
  */
 public abstract class ChessCrudServiceImpl<
-        T extends BaseEntity, K extends Serializable, D extends BaseDto, F extends BaseFilter>
+        T extends ChessEntity<K>, K extends Serializable, D extends BaseDto, F extends BaseFilter>
     extends BaseServiceImpl<T, K, D> implements ChessCrudService<T, K, D, F> {
   private static final int ENTITY_CLASS_INDEX = 0;
   private final ChessCrudRepository<T, K> repository;

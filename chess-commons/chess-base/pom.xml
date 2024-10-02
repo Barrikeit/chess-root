@@ -19,6 +19,13 @@
     </build>
 
     <dependencies>
+        <!-- Chess dependencies -->
+        <dependency>
+            <groupId>org.barrikeit</groupId>
+            <artifactId>chess-domain</artifactId>
+            <type>jar</type>
+        </dependency>
+
         <!-- Web dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -93,10 +100,6 @@
         <dependency>
             <groupId>nz.net.ultraq.thymeleaf</groupId>
             <artifactId>thymeleaf-layout-dialect</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.barrikeit</groupId>
-            <artifactId>chess-domain</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -2,7 +2,7 @@ package org.barrikeit.core.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
-import org.barrikeit.core.util.StringSerilizer;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
