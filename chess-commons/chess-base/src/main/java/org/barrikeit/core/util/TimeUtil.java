@@ -1,74 +1,67 @@
 package org.barrikeit.core.util;
 
-import static org.barrikeit.core.util.constants.ApplicationConstants.PATTERN_DATE_TIME;
+import static org.barrikeit.core.util.constants.ApplicationConstants.DATE_FORMATTER;
+import static org.barrikeit.core.util.constants.ApplicationConstants.DATE_TIME_FORMATTER;
+import static org.barrikeit.core.util.constants.ApplicationConstants.DEFAULT_TIME_ZONE;
 import static org.barrikeit.core.util.constants.ApplicationConstants.PATTERN_LOCAL_DATE;
+import static org.barrikeit.core.util.constants.ApplicationConstants.PATTERN_LOCAL_DATE_TIME;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
-import org.barrikeit.core.error.BadRequestException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TimeUtil {
+  private TimeUtil() {throw new IllegalStateException("Utility class");}
 
-  private static String zone;
+  @Value("${chess.application.timeZone:" + DEFAULT_TIME_ZONE + "}")
+  private static ZoneId zone;
 
-  @Value("${chess.application.timeZone:Europe/Madrid}")
-  public void setZoneStatic(String zone) {
-    TimeUtil.zone = zone;
+  public static Instant instantNow() {
+    return Instant.now().atZone(zone).toInstant();
   }
 
-  public static Instant nowInstant() {
-    return Instant.now().atZone(ZoneId.of(zone)).toInstant();
+  public static Date dateNow() {
+    return Date.from(instantNow());
   }
 
-  public static Date nowDate() {
-    return Date.from(nowInstant());
+  public static LocalDate localDateNow() {
+    return instantNow().atZone(zone).toLocalDate();
   }
 
-  public static LocalDate nowLocalDate() {
-    return nowInstant().atZone(ZoneId.of(zone)).toLocalDate();
-  }
-
-  public static LocalDateTime nowLocalDateTime() {
-    return nowInstant().atZone(ZoneId.of(zone)).toLocalDateTime();
+  public static LocalDateTime localDateTimeNow() {
+    return instantNow().atZone(zone).toLocalDateTime();
   }
 
   public static LocalDate convertLocalDate(String date) {
-    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(PATTERN_LOCAL_DATE);
-
     try {
-      return LocalDate.parse(date, dateFormatter);
+      return LocalDate.parse(date, DATE_FORMATTER);
     } catch (DateTimeParseException e) {
-      throw new IllegalArgumentException("Formato de fecha y hora inválido: " + date);
+      throw new IllegalArgumentException("Invalid date format: " + date, e);
     }
   }
 
   public static LocalDateTime convertLocalDateTime(String date) {
-    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(PATTERN_LOCAL_DATE);
-    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(PATTERN_DATE_TIME);
-
     try {
-      return LocalDateTime.parse(date, dateTimeFormatter);
+      return LocalDateTime.parse(date, DATE_TIME_FORMATTER);
     } catch (DateTimeParseException e) {
+      // Attempt to parse as LocalDate and combine with LocalTime.MIN
       try {
-        return LocalDateTime.of(LocalDate.parse(date, dateFormatter), LocalTime.MIN);
+        return LocalDateTime.of(LocalDate.parse(date, DATE_FORMATTER), LocalTime.MIN);
       } catch (DateTimeParseException ex) {
-        throw new BadRequestException("Formato de fecha y hora inválido: " + date);
+        throw new IllegalArgumentException("Invalid date and time format: " + date, ex);
       }
     }
   }
 
   public static String formatLocalDateTime(LocalDateTime date, String format) {
-    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(format);
-    return date.format(dateTimeFormatter);
+    return date.format(DateTimeFormatter.ofPattern(format));
   }
 
   public static String formatLocalDate(LocalDate date, String format) {
-    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(format);
-    return date.format(dateFormatter);
+    return date.format(DateTimeFormatter.ofPattern(format));
   }
 }

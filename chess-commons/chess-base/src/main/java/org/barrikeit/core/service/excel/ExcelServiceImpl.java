@@ -1,6 +1,8 @@
 package org.barrikeit.core.service.excel;
 
-import static org.barrikeit.core.util.constants.ApplicationConstants.PATTERN_DATE_TIME_DOWNLOAD;
+import static org.barrikeit.core.util.constants.ApplicationConstants.HEADER_KEY;
+import static org.barrikeit.core.util.constants.ApplicationConstants.PATTERN_LOCAL_DATE_TIME_DOWNLOAD;
+import static org.barrikeit.core.util.constants.ApplicationConstants.RESPONSE_CONTENT_TYPE_EXCEL;
 
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,6 +22,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.DataFormat;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFFont;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.barrikeit.core.error.BadRequestException;
 import org.barrikeit.core.util.ExcelUtil;
 import org.barrikeit.core.util.ReflectionUtil;
@@ -34,6 +53,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 @Slf4j
 public class ExcelServiceImpl implements ExcelService {
+
   private final MessageSource messageSource;
 
   @Autowired
@@ -48,8 +68,7 @@ public class ExcelServiceImpl implements ExcelService {
     String fileName =
         this.messageSource.getMessage(names.get(0), null, LocaleContextHolder.getLocale())
             + "_"
-            + TimeUtil.formatLocalDateTime(
-                TimeUtil.nowLocalDateTime(), PATTERN_DATE_TIME_DOWNLOAD);
+            + TimeUtil.formatLocalDateTime(TimeUtil.localDateTimeNow(), PATTERN_LOCAL_DATE_TIME_DOWNLOAD);
     String sheetName =
         this.messageSource.getMessage(names.get(1), null, LocaleContextHolder.getLocale());
     downloadXlsx(response, fileName, sheetName, headers, data);

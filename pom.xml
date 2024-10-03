@@ -10,9 +10,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>chess-parent</module>
-        <module>chess-data-jpa</module>
         <module>chess-commons</module>
+        <module>chess-data-jpa</module>
+        <module>chess-parent</module>
     </modules>
 
     <properties>
@@ -25,63 +25,49 @@
         <!-- VERSIONES -->
         <app.version>0.0.1</app.version>
         <java.version>17</java.version>
-        <java-jwt.version>3.18.3</java-jwt.version>
-        <jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
-        <jakarta-xml-bind-api.version>4.0.0</jakarta-xml-bind-api.version>
-        <apache-poi.version>5.2.2</apache-poi.version>
-        <commons-io.version>2.11.0</commons-io.version>
-        <commons-validator.version>1.7</commons-validator.version>
-        <jaxb-runtime.version>3.0.2</jaxb-runtime.version>
-        <jackson-databind.version>2.14.1</jackson-databind.version>
-        <!-- VERSIONES SPRING -->
-        <springframework.statemachine.version>3.2.0</springframework.statemachine.version>
-        <spring-boot.version>3.1.8</spring-boot.version>
-        <spring-boot-admin-starter-client.version>3.0.0</spring-boot-admin-starter-client.version>
-        <spring-rabbit-test.version>2.4.6</spring-rabbit-test.version>
+        <maven.version>3.2.5</maven.version>
+
+        <!--INICIO: Actualizar todas las versiones juntas al cambiar versión de spring-boot -->
+        <!--Revisar versiones spring-boot-dependencies-->
+        <!--https://repo1.maven.org/maven2/org/springframework/boot/spring-boot-dependencies/3.2.10/spring-boot-dependencies-3.2.10.pom -->
+        <spring-boot.version>3.2.10</spring-boot.version>
         <spring-cloud.version>2022.0.1</spring-cloud.version>
         <spring-cloud-starter-openfeign.version>3.1.1</spring-cloud-starter-openfeign.version>
-        <springdoc.version>2.0.0</springdoc.version>
-        <springdoc-openapi-starter-webmvc-ui.version>2.0.0</springdoc-openapi-starter-webmvc-ui.version>
-        <thymeleaf.version>3.0.14.RELEASE</thymeleaf.version>
-        <!-- VERSIONES LOMBOK -->
-        <lombok.version>1.18.22</lombok.version>
-        <mapstruct.version>1.4.2.Final</mapstruct.version>
+        <springdoc.version>2.6.0</springdoc.version>
+        <spring-rabbit-test.version>2.4.6</spring-rabbit-test.version>
+        <springframework.statemachine.version>3.2.1</springframework.statemachine.version>
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+        <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version>
+        <maven-failsafe-plugin.version>3.1.2</maven-failsafe-plugin.version>
+        <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
+        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
+        <maven-war-plugin.version>3.4.0</maven-war-plugin.version>
+        <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
+        <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
+        <lombok.version>1.18.34</lombok.version>
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
-        <!-- VERSIONES ??? -->
-        <caffeine.version>3.1.1</caffeine.version>
+        <jakarta-persistence.version>3.1.0</jakarta-persistence.version>
+        <!--FIN: Actualizar todas las versiones juntas al cambiar versión de spring-boot -->
+
+        <apt-maven-plugin.version>1.1.3</apt-maven-plugin.version>
+        <commons-io.version>2.11.0</commons-io.version>
         <dependency-check-maven.version>7.4.4</dependency-check-maven.version>
         <flying-saucer-pdf-openpdf.version>9.1.22</flying-saucer-pdf-openpdf.version>
+        <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
+        <java-jwt.version>3.18.3</java-jwt.version>
+        <jaxb-runtime.version>3.0.2</jaxb-runtime.version>
         <jolokia-core.version>1.7.1</jolokia-core.version>
+        <mapstruct.version>1.4.2.Final</mapstruct.version>
+        <modernizer-maven-plugin.version>2.3.0</modernizer-maven-plugin.version>
+        <pitest-junit5-plugin.version>0.15</pitest-junit5-plugin.version>
         <pitest-maven.version>1.7.4</pitest-maven.version>
+        <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
         <tika-core.version>2.3.0</tika-core.version>
         <jsoup.version>1.17.2</jsoup.version>
-        <micrometer-tracing.version>1.0.1</micrometer-tracing.version>
+        <commons-validator.version>1.8.0</commons-validator.version>
+        <apache-poi.version>5.2.2</apache-poi.version>
         <logstash-gelf.version>1.15.0</logstash-gelf.version>
         <pdfbox.version>2.0.26</pdfbox.version>
-        <!-- VERSIONES BBDD -->
-        <hibernate.version>6.1.6.Final</hibernate.version>
-        <querydsl.version>5.0.0</querydsl.version>
-        <zipkin-reporter-brave.version>2.16.3</zipkin-reporter-brave.version>
-        <!-- VERSIONES TESTS -->
-        <assertj.version>3.24.2</assertj.version>
-        <junit-jupiter.version>5.9.2</junit-jupiter.version>
-        <mockito-junit-jupiter.version>4.8.1</mockito-junit-jupiter.version>
-        <!-- VERSIONES PLUGINS -->
-        <maven.version>3.2.5</maven.version>
-        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
-        <maven-enforcer-plugin.version>3.1.0</maven-enforcer-plugin.version>
-        <maven-failsafe-plugin.version>2.22.0</maven-failsafe-plugin.version>
-        <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
-        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-        <maven-war-plugin.version>3.3.2</maven-war-plugin.version>
-        <maven-jar-plugin.version>3.0.0</maven-jar-plugin.version>
-        <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
-        <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
-        <apt-maven-plugin.version>1.1.3</apt-maven-plugin.version>
-        <modernizer-maven-plugin.version>2.3.0</modernizer-maven-plugin.version>
-        <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
-        <git-commit-id-maven-plugin.version>5.0.0</git-commit-id-maven-plugin.version>
-        <pitest-junit5-plugin.version>0.15</pitest-junit5-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -89,19 +75,7 @@
             <!-- CHESS ROOT DEPENDENCIES -->
             <dependency>
                 <groupId>org.barrikeit</groupId>
-                <artifactId>chess-parent</artifactId>
-                <version>${app.version}</version>
-                <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>org.barrikeit</groupId>
                 <artifactId>chess-data-jpa</artifactId>
-                <version>${app.version}</version>
-                <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>org.barrikeit</groupId>
-                <artifactId>chess-commons</artifactId>
                 <version>${app.version}</version>
                 <type>pom</type>
             </dependency>
@@ -148,9 +122,9 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>${jackson-databind.version}</version>
+                <groupId>org.springframework.statemachine</groupId>
+                <artifactId>spring-statemachine-core</artifactId>
+                <version>${springframework.statemachine.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.mapstruct</groupId>
@@ -172,21 +146,6 @@
                 <groupId>org.apache.tika</groupId>
                 <artifactId>tika-core</artifactId>
                 <version>${tika-core.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-amqp</artifactId>
-                <version>${spring-boot.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-mail</artifactId>
-                <version>${spring-boot.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.statemachine</groupId>
-                <artifactId>spring-statemachine-core</artifactId>
-                <version>${springframework.statemachine.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.auth0</groupId>
@@ -230,6 +189,7 @@
                 <artifactId>logstash-gelf</artifactId>
                 <version>${logstash-gelf.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -251,7 +211,7 @@
                 <version>${spring-cloud-starter-openfeign.version}</version>
             </dependency>
 
-            <!-- DOCTEMPLATE -->
+            <!--DOCTEMPLATE-->
             <dependency>
                 <groupId>org.jsoup</groupId>
                 <artifactId>jsoup</artifactId>
@@ -261,31 +221,6 @@
                 <groupId>org.apache.pdfbox</groupId>
                 <artifactId>pdfbox</artifactId>
                 <version>${pdfbox.version}</version>
-            </dependency>
-            <!-- SOAP -->
-            <dependency>
-                <groupId>jakarta.xml.bind</groupId>
-                <artifactId>jakarta.xml.bind-api</artifactId>
-                <version>${jakarta-xml-bind-api.version}</version>
-            </dependency>
-            <!-- TESTS DEPENDENCIES -->
-            <dependency>
-                <groupId>org.assertj</groupId>
-                <artifactId>assertj-core</artifactId>
-                <version>${assertj.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-api</artifactId>
-                <version>${junit-jupiter.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-junit-jupiter</artifactId>
-                <version>${mockito-junit-jupiter.version}</version>
-                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -301,6 +236,7 @@
                     <configuration>
                         <source>${java.version}</source>
                         <target>${java.version}</target>
+                        <parameters>true</parameters>
                         <annotationProcessorPaths>
                             <path>
                                 <groupId>org.glassfish.jaxb</groupId>
@@ -330,7 +266,7 @@
                             <path>
                                 <groupId>jakarta.persistence</groupId>
                                 <artifactId>jakarta.persistence-api</artifactId>
-                                <version>3.1.0</version>
+                                <version>${jakarta-persistence.version}</version>
                             </path>
                         </annotationProcessorPaths>
                     </configuration>
@@ -361,7 +297,7 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${maven-surefire-plugin.version}</version>
                     <configuration>
-                        <!--suppress UnresolvedMavenProperty-->
+                        <!--suppress UnresolvedMavenProperty -->
                         <argLine>${surefire.jacoco.args}</argLine>
                         <includes>
                             <include>**/*Tests.java</include>
@@ -372,13 +308,31 @@
                             <exclude>**/*IntTests.java</exclude>
                         </excludes>
                     </configuration>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.apache.maven.surefire</groupId>
-                            <artifactId>surefire-junit47</artifactId>
-                            <version>3.0.0-M7</version>
-                        </dependency>
-                    </dependencies>
+                </plugin>
+                <!-- failsafe plugins -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>${maven-failsafe-plugin.version}</version>
+                    <configuration>
+                        <!--dont execute int test -->
+                        <skipITs>${skipITTests}</skipITs>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <argLine>${failsafe.jacoco.args} -Dfile.encoding=UTF-8</argLine>
+                        <includes>
+                            <include>**/*IntTest.java</include>
+                            <include>**/*IntTests.java</include>
+                        </includes>
+                        <reportsDirectory>tests</reportsDirectory>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>integration-test</goal>
+                                <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
                 <!-- jacoco plugins -->
                 <plugin>
@@ -400,6 +354,40 @@
                             <phase>package</phase>
                         </execution>
                     </executions>
+                </plugin>
+                <!-- pitest plugins -->
+                <plugin>
+                    <groupId>org.pitest</groupId>
+                    <artifactId>pitest-maven</artifactId>
+                    <version>${pitest-maven.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.pitest</groupId>
+                            <artifactId>pitest-junit5-plugin</artifactId>
+                            <version>${pitest-junit5-plugin.version}</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <historyInputFile>${project.build.directory}/pitest-history/pitest.bin</historyInputFile>
+                        <historyOutputFile>${project.build.directory}/pitest-history/pitest.bin</historyOutputFile>
+                        <mutationThreshold>33</mutationThreshold>
+                        <mutators>
+                            <mutator>STRONGER</mutator>
+                        </mutators>
+                        <outputFormats>
+                            <outputFormat>XML</outputFormat>
+                            <outputFormat>HTML</outputFormat>
+                        </outputFormats>
+                        <reportsDirectory>${project.build.directory}/site/pit-reports</reportsDirectory>
+                        <targetClasses>
+                            <param>${project.groupId}.*</param>
+                        </targetClasses>
+                        <targetTests>
+                            <param>${project.groupId}.*Test</param>
+                        </targetTests>
+                        <threads>4</threads>
+                        <timestampedReports>false</timestampedReports>
+                    </configuration>
                 </plugin>
                 <!-- help plugins -->
                 <plugin>
@@ -521,17 +509,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <profiles>
-        <!-- h2-->
-        <profile>
-            <id>h2</id>
-            <dependencies>
-                <dependency>
-                    <groupId>com.h2database</groupId>
-                    <artifactId>h2</artifactId>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
 </project>

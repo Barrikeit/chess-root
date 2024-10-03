@@ -4,8 +4,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 public class UserUtil {
-
-  private UserUtil() {}
+  private UserUtil() {throw new IllegalStateException("Utility class");}
 
   /**
    * Obtiene el username del usuario autenticado a traves del objeto Authentication

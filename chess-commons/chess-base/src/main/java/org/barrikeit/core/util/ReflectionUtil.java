@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ReflectionUtil {
-  private ReflectionUtil() {}
+  private ReflectionUtil() {throw new IllegalStateException("Utility class");}
 
   public static <E> Class<E> getClass(Class<E> clazz, int index) {
     ParameterizedType parameterizedType = (ParameterizedType) clazz.getGenericSuperclass();

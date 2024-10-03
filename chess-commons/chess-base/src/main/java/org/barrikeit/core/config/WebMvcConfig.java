@@ -3,6 +3,7 @@ package org.barrikeit.core.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 
+import org.barrikeit.core.util.StringSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -24,7 +25,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
   public HttpMessageConverter<Object> jsonConverter() {
     ObjectMapper objectMapper =
         Jackson2ObjectMapperBuilder.json()
-            .serializerByType(String.class, new StringSerilizer())
+            .serializerByType(String.class, new StringSerializer())
             .build();
     return new MappingJackson2HttpMessageConverter(objectMapper);
   }

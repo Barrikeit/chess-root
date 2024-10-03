@@ -49,7 +49,7 @@ barrikeit:
       expiration-in-sec: 3600
       expiration-refresh-in-sec: 4500
     app-validator-filter:
-      app-self-name: 'lbda-mcd'
+      app-self-name: 'ajedrezillo'
       app-header-name: 'x-aei-called-service'
       app-header-name-validation-Filter: true
       app-security-name: 'barrikeit-security'
