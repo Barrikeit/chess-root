@@ -1,7 +1,7 @@
 package org.barrikeit.core.service;
 
 import static org.barrikeit.core.util.constants.ChessEntityConstants.ID;
-import static org.barrikeit.core.util.constants.ErrorConstants.ERROR_MSG_NOT_FOUND;
+import static org.barrikeit.core.util.constants.ErrorConstants.ERROR_NOT_FOUND_MSG;
 
 import java.io.Serializable;
 import java.util.List;
@@ -42,7 +42,7 @@ public abstract class BaseServiceImpl<
     return repository
         .findById(id)
         .map(this.mapper::toDto)
-        .orElseThrow(() -> new NotFoundException(ERROR_MSG_NOT_FOUND, id));
+        .orElseThrow(() -> new NotFoundException(ERROR_NOT_FOUND_MSG, id));
   }
 
   @Override

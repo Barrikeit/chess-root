@@ -1,7 +1,7 @@
 package org.barrikeit.core.error;
 
-import static org.barrikeit.core.util.constants.ErrorConstants.ERROR_MSG_INTERNAL_ERROR;
-import static org.barrikeit.core.util.constants.ErrorConstants.ERROR_TITLE_INTERNAL_ERROR;
+import static org.barrikeit.core.util.constants.ErrorConstants.ERROR_INTERNAL_ERROR_MSG;
+import static org.barrikeit.core.util.constants.ErrorConstants.ERROR_INTERNAL_ERROR_TITLE;
 
 import java.io.Serial;
 import java.net.URI;
@@ -42,8 +42,8 @@ public class ChessProblem extends ErrorResponseException {
 
     if (ObjectUtils.isEmpty(exceptionMessage.getDetail())
         && ObjectUtils.isEmpty(exceptionMessage.getMessage())) {
-      this.setTitle(ERROR_TITLE_INTERNAL_ERROR);
-      this.setDetail(ERROR_MSG_INTERNAL_ERROR);
+      this.setTitle(ERROR_INTERNAL_ERROR_TITLE);
+      this.setDetail(ERROR_INTERNAL_ERROR_MSG);
     }
 
     if (exceptionMessage.getType() != null) this.setType(URI.create(exceptionMessage.getType()));

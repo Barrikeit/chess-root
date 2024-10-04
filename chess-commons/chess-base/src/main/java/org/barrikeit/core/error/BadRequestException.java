@@ -12,7 +12,7 @@ public class BadRequestException extends ChessProblem {
     super(
         defaultMessageKey,
         HttpStatus.BAD_REQUEST,
-        ErrorConstants.ERROR_TITLE_BAD_REQUEST,
+        ErrorConstants.ERROR_BAD_REQUEST_TITLE,
         TYPE,
         messageArgs);
   }

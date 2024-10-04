@@ -1,7 +1,7 @@
 package org.barrikeit.core.service;
 
 import static org.barrikeit.core.util.constants.ChessEntityConstants.CODE;
-import static org.barrikeit.core.util.constants.ErrorConstants.ERROR_MSG_NOT_FOUND;
+import static org.barrikeit.core.util.constants.ErrorConstants.ERROR_NOT_FOUND_MSG;
 
 import java.io.Serializable;
 import java.util.List;
@@ -42,14 +42,14 @@ public abstract class ChessEntityServiceImpl<
     return repository
         .findByCode(code)
         .map(mapper::toDto)
-        .orElseThrow(() -> new NotFoundException(ERROR_MSG_NOT_FOUND, code));
+        .orElseThrow(() -> new NotFoundException(ERROR_NOT_FOUND_MSG, code));
   }
 
   @Override
   public T findEntityByCode(S code) {
     return repository
         .findByCode(code)
-        .orElseThrow(() -> new NotFoundException(ERROR_MSG_NOT_FOUND, code));
+        .orElseThrow(() -> new NotFoundException(ERROR_NOT_FOUND_MSG, code));
   }
 
   @Override

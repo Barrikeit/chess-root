@@ -23,8 +23,8 @@ import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import static org.barrikeit.core.util.constants.ErrorConstants.ERROR_MSG_VALIDATION_FIELDS;
-import static org.barrikeit.core.util.constants.ErrorConstants.ERROR_TITLE_INTERNAL_ERROR;
+import static org.barrikeit.core.util.constants.ErrorConstants.ERROR_VALIDATION_FIELDS;
+import static org.barrikeit.core.util.constants.ErrorConstants.ERROR_INTERNAL_ERROR_TITLE;
 
 @RestControllerAdvice
 @Slf4j
@@ -72,7 +72,7 @@ public class ExceptionTranslator extends ResponseEntityExceptionHandler {
     errors.put("title", ex.getBody().getTitle());
     errors.put("status", ex.getBody().getStatus());
     errors.put(
-        "detail", messageSource.getMessage(ERROR_MSG_VALIDATION_FIELDS, null, request.getLocale()));
+        "detail", messageSource.getMessage(ERROR_VALIDATION_FIELDS, null, request.getLocale()));
     errors.put("instance", ((ServletWebRequest) request).getRequest().getRequestURI());
 
     // Sacar el error asociado a cada campo del objeto
@@ -174,7 +174,7 @@ public class ExceptionTranslator extends ResponseEntityExceptionHandler {
         response = messageSource.getMessage(key, args, locale);
       } catch (NoSuchMessageException ex) {
         log.debug("Este mensaje no está en el resources bundle i18m\\error_es.properties: {}", key);
-        response = messageSource.getMessage(ERROR_TITLE_INTERNAL_ERROR, null, locale);
+        response = messageSource.getMessage(ERROR_INTERNAL_ERROR_TITLE, null, locale);
       }
     } else {
       response = key;

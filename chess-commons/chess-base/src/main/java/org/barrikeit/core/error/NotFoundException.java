@@ -12,7 +12,7 @@ public class NotFoundException extends ChessProblem {
     super(
         defaultMessageKey,
         HttpStatus.NOT_FOUND,
-        ErrorConstants.ERROR_TITLE_NOT_FOUND,
+        ErrorConstants.ERROR_NOT_FOUND_TITLE,
         TYPE,
         messageArgs);
   }

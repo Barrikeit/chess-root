@@ -3,16 +3,19 @@ package org.barrikeit.core.util.constants;
 public class ErrorConstants {
   private ErrorConstants() {}
 
-  public static final String ERROR_UNEXPECTED = "error.title.unexpected";
+  public static final String ERROR_UNEXPECTED = "error.unexpected";
 
-  public static final String ERROR_TITLE_INTERNAL_ERROR = "error.title.internal.error";
-  public static final String ERROR_MSG_INTERNAL_ERROR = "error.msg.internal.error";
-  public static final String ERROR_TITLE_BAD_REQUEST = "error.title.bad.request";
-  public static final String ERROR_MSG_BAD_REQUEST = "error.msg.bad.request";
-  public static final String ERROR_TITLE_NOT_FOUND = "error.title.not.found";
-  public static final String ERROR_MSG_NOT_FOUND = "error.msg.not.found";
+  public static final String ERROR_INTERNAL_ERROR_TITLE = "error.internal.error.title";
+  public static final String ERROR_INTERNAL_ERROR_MSG = "error.internal.error.msg";
+  public static final String ERROR_BAD_REQUEST_TITLE = "error.bad.request.title";
+  public static final String ERROR_BAD_REQUEST_MSG = "error.bad.request.msg";
+  public static final String ERROR_NOT_FOUND_TITLE = "error.not.found.title";
+  public static final String ERROR_NOT_FOUND_MSG = "error.not.found.msg";
 
-  public static final String ERROR_MSG_VALIDATION_FIELDS = "error.msg.validation.fields";
+  public static final String ERROR_INVALID_TOKEN = "error.token.invalid";
+  public static final String ERROR_EXPIRED_TOKEN = "error.token.expired";
+
+  public static final String ERROR_VALIDATION_FIELDS = "error.validation.fields";
 
   public static final String ERROR_INVALID_SEARCH_OPERATION = "error.msg.invalid.search.operation";
   public static final String ERROR_INVALID_FILTER = "error.msg.invalid.filter";
