@@ -1,6 +1,7 @@
 package org.barrikeit.security.audit;
 
 public final class AuditHolder {
+  private AuditHolder() {}
 
   private static final ThreadLocal<AuditInfo> auditThreadLocal = new ThreadLocal<>();
 

@@ -1,9 +1,9 @@
 barrikeit:
   application:
-    name: ajedrezillo
-    version: v1
     title: ajedrezillo
+    name: ajedrezillo
     description: chess server
+    version: v1
     timeZone: Europe/Madrid
 spring:
   batch:
@@ -27,14 +27,14 @@ spring:
       max-request-size: 100MB
 
 springdoc:
-  api-docs.path: /openapi/api-docs
+  api-docs.path: /chess/api-docs
   packagesToScan: org.barrikeit
   show-actuator: false
   swagger-ui:
     display-request-duration: true
     filter: true
     operations-sorter: method
-    path: /openapi/swagger-ui
+    path: /chess/swagger-ui
     use-root-path: true
   default-consumes-media-type: application/json
   default-produces-media-type: application/json

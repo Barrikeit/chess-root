@@ -1,6 +1,5 @@
 package org.barrikeit.security.audit;
 
-import es.miteco.lbda.security.authentication.JwtAuthenticationToken;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -70,7 +69,6 @@ public class AuditInfoFilter extends OncePerRequestFilter {
   }
 
   private boolean isTestProfile() {
-
     return "test".equals(activeProfile);
   }
 }

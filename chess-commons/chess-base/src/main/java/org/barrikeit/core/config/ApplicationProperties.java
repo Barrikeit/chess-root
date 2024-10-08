@@ -20,9 +20,9 @@ public class ApplicationProperties {
   private final CacheProperties cache = new CacheProperties();
 
   private String title;
+  private String name;
   private String description;
   private String version;
-  private String name;
   private String timeZone;
 
   private Cors cors;
