@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <th:block th:switch="${type}">
+        <title th:case="'CREATE_USER'" th:text="#{mail.subject.createUser}">Default Title</title>
+        <title th:case="'VERIFY_USER'" th:text="#{mail.subject.verifyUser}">Default Title</title>
+        <title th:case="'BAN_USER'" th:text="#{mail.subject.banUser}">Default Title</title>
+        <title th:case="'UPDATE_USER'" th:text="#{mail.subject.updateUser}">Default Title</title>
+    </th:block>
+    <style th:replace="~{mail/userMailCSS.html}"></style>
+</head>
+<body th:switch="${type}">
+<header>
+    <table>
+        <tr>
+            <td rowspan="2"><img alt="Image" class="img" src="cid:ajedrezillo_logo"></td>
+            <th th:text="#{mail.logo}">Default Logo</th>
+        </tr>
+        <tr>
+            <td th:text="#{mail.name}">Default Name</td>
+        </tr>
+    </table>
+</header>
+<br>
+<br>
+<div th:case="'CREATE_USER'">
+    <h1 th:text="#{mail.title.createUser}">Default Title</h1>
+    <p>
+        <span th:text="#{mail.body.user} + ' ' + ${user.getUsername()} + ' (' + ${user.getEmail()}  + ') ' + #{mail.body.createUser} + ' '"></span>
+        <a th:href="${url}" th:text="#{mail.chess} + ' '"></a>
+        <span th:replace="~{mail/userData.html :: userData}"></span>
+        <br/>
+        <span th:utext="'Su contraseña: ' + ${user.getUsername()}"></span>
+    </p>
+    <p th:text="#{mail.body.fecha} + ' ' + ${#temporals.format(date, 'dd/MM/yyyy HH:mm')}">replaceable</p>
+</div>
+<div th:case="'VERIFY_USER'">
+    <h1 th:text="#{mail.title.verifyUser}">Default Title</h1>
+    <p>
+        <span th:text="#{mail.body.user} + ' ' + ${user.getUsername()} + ' (' + ${user.getEmail()}  + ') '+ #{mail.body.verifyUser} + ' '"></span>
+        <a th:href="${url}" th:text="#{mail.chess} + ' '"></a>
+        <span th:text="#{mail.body.admin} + ' ' + ${admin}"></span>
+    </p>
+    <p th:text="#{mail.body.fecha} + ' ' + ${#temporals.format(date, 'dd/MM/yyyy HH:mm')}">replaceable</p>
+</div>
+<div th:case="'BAN_USER'">
+    <h1 th:text="#{mail.title.banUser}">Default Title</h1>
+    <p>
+        <span th:text="#{mail.body.user} + ' ' + ${user.getUsername()} + ' (' + ${user.getEmail()}  + ') '+ #{mail.body.banUser} + ' '"></span>
+        <a th:href="${url}" th:text="#{mail.chess} + ' '"></a>
+        <span th:text="#{mail.body.admin} + ' ' + ${admin}"></span>
+    </p>
+    <p th:text="#{mail.body.fecha} + ' ' + ${#temporals.format(date, 'dd/MM/yyyy HH:mm')}">replaceable</p>
+</div>
+<div th:case="'UPDATE_USER'">
+    <h1 th:text="#{mail.title.updateUser}">Default Title</h1>
+    <p>
+        <span th:text="#{mail.body.user} + ' ' + ${user.getUsername()} + ' (' + ${user.getEmail()}  + ') ' + #{mail.body.updateUser} + ' '"></span>
+        <a th:href="${url}" th:text="#{mail.chess} + ' '"></a>
+        <span th:replace="~{mail/userData.html :: userData}">replaceable</span>
+    </p>
+    <p th:text="#{mail.body.fecha} + ' ' + ${#temporals.format(date, 'dd/MM/yyyy HH:mm')}">replaceable</p>
+</div>
+<br>
+<br>
+<footer th:with="year=${#temporals.year(date)}, name=#{mail.chess}">
+    <h1 th:text="${year + ' ' + name}">Default Footer</h1>
+</footer>
+</body>
+</html>
