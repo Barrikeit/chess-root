@@ -14,7 +14,7 @@
     <packaging>jar</packaging>
 
     <build>
-        <finalName>chess-domain</finalName>
+        <finalName>chess-security</finalName>
     </build>
 
     <dependencies>
