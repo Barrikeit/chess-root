@@ -17,7 +17,7 @@ DROP TABLE IF EXISTS game_states CASCADE;
 DROP TABLE IF EXISTS ranks CASCADE;
 DROP TABLE IF EXISTS colors CASCADE;
 
-CREATE TYPE friendship_status AS ENUM ('pending', 'accepted', 'blocked');
+CREATE TYPE friendship_status AS ENUM ('PENDING', 'ACCEPTED', 'BLOCKED');
 
 CREATE TABLE colors
 (
@@ -117,7 +117,7 @@ CREATE TABLE friendships
     id_friendship BIGSERIAL                NOT NULL,   -- identificador de la amistad
     id_user1      BIGINT                   NOT NULL,   -- identificador del usuario que envía la solicitud
     id_user2      BIGINT                   NOT NULL,   -- identificador del usuario que recibe la solicitud
-    status        friendship_status DEFAULT 'pending', -- estado de la relación
+    status        friendship_status DEFAULT 'PENDING', -- estado de la relación
     start_date    TIMESTAMP WITH TIME ZONE NOT NULL,   -- fecha y hora del comienzo
     end_date      TIMESTAMP WITH TIME ZONE NULL        -- fecha y hora del final
 );
