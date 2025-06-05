@@ -8,6 +8,7 @@ public class JwtConstants {
   public static final String MODULES = "modules";
   public static final String SESSION_ID = "sessionId";
   public static final String JWT_COOKIE_NAME = "AUTH-JWT";
+
   private JwtConstants() {
     throw new IllegalStateException("Constants class");
   }
