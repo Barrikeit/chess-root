@@ -13,6 +13,7 @@
         <module>chess-domain</module>
         <module>chess-core</module>
         <module>chess-pom</module>
+        <module>chess-security</module>
     </modules>
 
     <properties>
@@ -70,17 +71,24 @@
         <dependencies>
             <!-- Chess Core Dependencies -->
             <dependency>
-                <groupId>org.barrikeit.chess</groupId>
-                <artifactId>chess-base</artifactId>
+                <groupId>org.barrikeit</groupId>
+                <artifactId>chess-core</artifactId>
                 <version>${app.version}</version>
                 <type>jar</type>
             </dependency>
             <!-- Chess Domain Dependencies -->
             <dependency>
-                <groupId>org.barrikeit.chess</groupId>
+                <groupId>org.barrikeit</groupId>
                 <artifactId>chess-domain</artifactId>
                 <version>${app.version}</version>
                 <type>jar</type>
+            </dependency>
+            <!-- Chess Pom Dependencies -->
+            <dependency>
+                <groupId>org.barrikeit</groupId>
+                <artifactId>chess-pom</artifactId>
+                <version>${app.version}</version>
+                <type>pom</type>
             </dependency>
 
             <!-- Spring Boot -->
@@ -114,6 +122,13 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-log4j2</artifactId>
                 <version>${spring-boot.version}</version>
+            </dependency>
+
+            <!-- Jsoup -->
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${jsoup.version}</version>
             </dependency>
 
             <!-- commons-io para leer, escribir y modificar archivos y carpetas (FileUtils.)-->
@@ -176,14 +191,6 @@
     </dependencyManagement>
 
     <dependencies>
-        <!-- Chess Dependencies -->
-        <dependency>
-            <groupId>org.barrikeit.chess</groupId>
-            <artifactId>chess-parent</artifactId>
-            <version>${app.version}</version>
-            <type>pom</type>
-        </dependency>
-
         <!-- Lombok y Logs -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -322,6 +329,16 @@
             </plugins>
         </pluginManagement>
 
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar-plugin.version}</version>
+                <configuration>
+                    <outputDirectory>dist</outputDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>

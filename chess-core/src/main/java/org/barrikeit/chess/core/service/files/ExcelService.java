@@ -1,4 +1,4 @@
-package org.barrikeit.chess.core.service.excel;
+package org.barrikeit.chess.core.service.files;
 
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
@@ -33,31 +33,29 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Log4j2
 @Service
-public class ExcelServiceImpl implements ExcelService {
+public class ExcelService {
 
   private final MessageSource messageSource;
 
   @Autowired
-  public ExcelServiceImpl(MessageSource messageSource) {
+  public ExcelService(MessageSource messageSource) {
     this.messageSource = messageSource;
   }
 
-  @Override
   public void downloadXlsx(HttpServletResponse response, Class<?> clazz, List<?> data) {
-    Map<String, Object> names = ReflectionUtil.getAnnotationProperties(clazz, ExcelFile.class);
+    Map<String, Object> excelFile = ReflectionUtil.getAnnotationProperties(clazz, ExcelFile.class);
     List<Field> headers = ExcelUtil.getExcelColumns(clazz, false);
     String fileName =
         this.messageSource.getMessage(
-                names.get("file").toString(), null, LocaleContextHolder.getLocale())
+                excelFile.get("file").toString(), null, LocaleContextHolder.getLocale())
             + "_"
             + TimeUtil.localDateTimeNow().format(UtilConstants.DATE_TIME_FORMATTER_DOWNLOAD);
     String sheetName =
         this.messageSource.getMessage(
-            names.get("sheet").toString(), null, LocaleContextHolder.getLocale());
+            excelFile.get("sheet").toString(), null, LocaleContextHolder.getLocale());
     downloadXlsx(response, fileName, sheetName, headers, data);
   }
 
-  @Override
   public void downloadXlsx(
       HttpServletResponse response,
       String fileName,
@@ -93,7 +91,6 @@ public class ExcelServiceImpl implements ExcelService {
     return workbook;
   }
 
-  @Override
   public String[] getColumnsFromXlsx(File file) {
     try (FileInputStream fis = new FileInputStream(file)) {
       return getColumnsFromInputStream(fis);
@@ -102,7 +99,6 @@ public class ExcelServiceImpl implements ExcelService {
     }
   }
 
-  @Override
   public String[] getColumnsFromXlsx(MultipartFile file) {
     try (InputStream inputStream = file.getInputStream()) {
       return getColumnsFromInputStream(inputStream);
@@ -111,7 +107,6 @@ public class ExcelServiceImpl implements ExcelService {
     }
   }
 
-  @Override
   public boolean isValidXLSX(MultipartFile file) {
     try {
       Workbook workbook = WorkbookFactory.create(file.getInputStream());
@@ -122,7 +117,6 @@ public class ExcelServiceImpl implements ExcelService {
     }
   }
 
-  @Override
   public boolean isValidXLSX(File file) {
     try {
       InputStream inputStream = new FileInputStream(file);

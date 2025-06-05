@@ -1,13 +1,11 @@
 package org.barrikeit.chess.core.service;
 
 import jakarta.persistence.criteria.*;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import org.barrikeit.chess.core.service.dto.GenericDto;
-import org.barrikeit.chess.core.service.excel.ExcelService;
 import org.barrikeit.chess.core.service.mapper.GenericMapper;
 import org.barrikeit.chess.core.util.ReflectionUtil;
 import org.barrikeit.chess.core.util.constants.ExceptionConstants;
@@ -35,13 +33,11 @@ public abstract class GenericBaseFilterService<
 
   private final R repository;
   private final M mapper;
-  private final ExcelService excelService;
 
-  protected GenericBaseFilterService(R repository, M mapper, ExcelService excelService) {
+  protected GenericBaseFilterService(R repository, M mapper) {
     super(repository, mapper);
     this.repository = repository;
     this.mapper = mapper;
-    this.excelService = excelService;
   }
 
   private static <T extends GenericEntity<? extends Serializable>>
@@ -154,22 +150,5 @@ public abstract class GenericBaseFilterService<
     }
 
     return conditions.stream().reduce(Specification::and).orElse(null);
-  }
-
-  public <T extends GenericDto> void download(
-      HttpServletResponse response,
-      Pageable page,
-      boolean unpaged,
-      String search,
-      GenericMapper<E, T> mapperDownload) {
-    if (mapperDownload == null) {
-      throw new BadRequestException(
-          ExceptionConstants.ERROR_DESCARGA_EXCEL, "No existe un mapper para ese modulo");
-    }
-    List<E> list = searchEntity(page, unpaged, search).getContent();
-    if (!list.isEmpty()) {
-      List<T> listDto = list.stream().map(mapperDownload::toDto).toList();
-      excelService.downloadXlsx(response, listDto.get(0).getClass(), listDto);
-    }
   }
 }

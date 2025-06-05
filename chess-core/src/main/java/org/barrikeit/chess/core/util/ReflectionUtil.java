@@ -3,8 +3,10 @@ package org.barrikeit.chess.core.util;
 import static org.barrikeit.chess.core.util.TimeUtil.convertLocalDate;
 import static org.barrikeit.chess.core.util.TimeUtil.convertLocalDateTime;
 
+import jakarta.persistence.Transient;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang3.reflect.MethodUtils;
 import org.barrikeit.chess.core.service.dto.GenericDto;
 import org.barrikeit.chess.core.util.constants.ExceptionConstants;
 import org.barrikeit.chess.core.util.exceptions.FieldValueException;
@@ -129,15 +132,37 @@ public class ReflectionUtil extends ReflectionUtils {
    * @param clazz Clase de la cual se extraen los campos anotados.
    * @param annotation La clase de la anotación que se busca en los campos.
    * @return Una lista con todos los campos anotados de la clase y sus superclases.
-   * @throws NotFoundException Si no se encuentra ningún campo con la anotación especificada.
    */
   public static List<Field> getFieldsWithAnnotation(
       Class<?> clazz, Class<? extends Annotation> annotation) {
-    List<Field> annotatedFields =
-        getFields(clazz).stream().filter(field -> field.isAnnotationPresent(annotation)).toList();
-    if (annotatedFields.isEmpty())
-      throw new NotFoundException(ExceptionConstants.ERROR_MISSING_ANNOTATION, annotation, clazz);
-    return annotatedFields;
+    return getFields(clazz).stream()
+        .filter(
+            field ->
+                field.isAnnotationPresent(annotation)
+                    && !field.isAnnotationPresent(Transient.class)
+                    && !Modifier.isTransient(field.getModifiers())
+                    && !Modifier.isStatic(field.getModifiers()))
+        .toList();
+  }
+
+  /**
+   * Obtiene todos los campos de una clase, incluyendo los campos de sus superclases, que NO estén
+   * anotados con una anotación específica.
+   *
+   * @param clazz Clase de la cual se extraen los campos NO anotados.
+   * @param annotation La clase de la anotación que se busca en los campos.
+   * @return Una lista con todos los campos SIN anotar de la clase y sus superclases.
+   */
+  public static List<Field> getFieldsWithoutAnnotation(
+      Class<?> clazz, Class<? extends Annotation> annotation) {
+    return getFields(clazz).stream()
+        .filter(
+            field ->
+                !field.isAnnotationPresent(annotation)
+                    && !field.isAnnotationPresent(Transient.class)
+                    && !Modifier.isTransient(field.getModifiers())
+                    && !Modifier.isStatic(field.getModifiers()))
+        .toList();
   }
 
   /**
@@ -179,8 +204,14 @@ public class ReflectionUtil extends ReflectionUtils {
     Map<String, Object> annotationParams = new HashMap<>();
     if (clazz.isAnnotationPresent(annotation)) {
       Annotation annotationInstance = clazz.getAnnotation(annotation);
-      for (Field field : annotation.getDeclaredFields()) {
-        annotationParams.put(field.getName(), getFieldValue(annotationInstance, field.getName()));
+      for (Method method : annotation.getDeclaredMethods()) {
+        try {
+          Object value = MethodUtils.invokeMethod(annotationInstance, method.getName());
+          annotationParams.put(method.getName(), value);
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+          throw new FieldValueException(
+              ExceptionConstants.ERROR_FIELD_GET_VALUE, method.getName(), annotationInstance);
+        }
       }
       return annotationParams;
     } else {
@@ -279,7 +310,7 @@ public class ReflectionUtil extends ReflectionUtils {
    * @throws UnExpectedException Si ocurre un error en la conversión o si el tipo no es soportado.
    */
   @SuppressWarnings("unchecked")
-  private <M> M castFieldToType(Object value, Class<M> targetType) {
+  public static <M> M castFieldToType(Object value, Class<M> targetType) {
     try {
       if (value == null) {
         return null;
@@ -295,6 +326,10 @@ public class ReflectionUtil extends ReflectionUtils {
         return (M) Float.valueOf(value.toString());
       } else if (targetType.equals(Double.class) || targetType.equals(double.class)) {
         return (M) Double.valueOf(value.toString());
+      } else if (targetType.equals(BigDecimal.class)) {
+        if (value instanceof String string) return (M) new BigDecimal(string);
+        if (value instanceof Long l) return (M) BigDecimal.valueOf(l);
+        if (value instanceof Double d) return (M) BigDecimal.valueOf(d);
       } else if (targetType.equals(Boolean.class) || targetType.equals(boolean.class)) {
         if (value instanceof String string) return (M) Boolean.valueOf(string);
       } else if (targetType.equals(LocalDate.class)) {

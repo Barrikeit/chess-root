@@ -4,7 +4,6 @@ import jakarta.transaction.Transactional;
 import java.io.Serializable;
 import lombok.extern.log4j.Log4j2;
 import org.barrikeit.chess.core.service.dto.GenericDto;
-import org.barrikeit.chess.core.service.excel.ExcelService;
 import org.barrikeit.chess.core.service.mapper.GenericMapper;
 import org.barrikeit.chess.core.util.constants.ExceptionConstants;
 import org.barrikeit.chess.core.util.exceptions.NotFoundException;
@@ -26,10 +25,8 @@ public abstract class GenericCodeFilterService<
   private final GenericMapper<E, D> mapper;
 
   protected GenericCodeFilterService(
-      GenericCodeRepository<E, I, C> repository,
-      GenericMapper<E, D> mapper,
-      ExcelService excelService) {
-    super(repository, mapper, excelService);
+      GenericCodeRepository<E, I, C> repository, GenericMapper<E, D> mapper) {
+    super(repository, mapper);
     this.repository = repository;
     this.mapper = mapper;
   }

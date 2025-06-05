@@ -1,13 +1,34 @@
 package org.barrikeit.chess.core.util;
 
-import lombok.extern.log4j.Log4j2;
-import org.barrikeit.chess.core.util.annotations.AccessColumn;
-import org.barrikeit.chess.core.util.model.AccessRow;
-import org.barrikeit.chess.core.util.model.FieldAndInstance;
+import static org.barrikeit.chess.core.util.constants.FileConstants.ATTACHMENT;
+import static org.barrikeit.chess.core.util.constants.FileConstants.CONTENT_TYPE_ACCESS;
+import static org.barrikeit.chess.core.util.constants.FileConstants.EXTENSION_ACCESS;
+import static org.barrikeit.chess.core.util.constants.FileConstants.FILENAME;
+import static org.barrikeit.chess.core.util.constants.FileConstants.HEADER_KEY;
 
-import java.lang.reflect.Field;
+import com.healthmarketscience.jackcess.Column;
+import com.healthmarketscience.jackcess.Database;
+import com.healthmarketscience.jackcess.DatabaseBuilder;
+import com.healthmarketscience.jackcess.Table;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+import lombok.extern.log4j.Log4j2;
+import org.apache.commons.io.IOUtils;
+import org.barrikeit.chess.core.service.dto.GenericDto;
+import org.barrikeit.chess.core.util.annotations.AccessColumn;
+import org.barrikeit.chess.core.util.annotations.AccessTable;
+import org.barrikeit.chess.core.util.exceptions.BadRequestException;
 
 @Log4j2
 public class AccessUtil {
@@ -15,58 +36,54 @@ public class AccessUtil {
     throw new IllegalStateException("AccessUtil class");
   }
 
-  public static AccessRow getAccessColumnFieldsByTable(Object instance, String accessTable) {
-    List<FieldAndInstance> fieldsFilteredByTable =
-        getFieldsWithAnnotationAccessColumns(instance, accessTable);
-
-    int size = fieldsFilteredByTable.size();
-    Object[] rowData = new Object[size];
-    List<Integer> uniqueIndexesList = new ArrayList<>();
-    for (FieldAndInstance fieldAndInstance : fieldsFilteredByTable) {
-      // mirar el atributo column de la anotacion que identifica el orden de la columna en el
-      // fichero Access
-      Field field = fieldAndInstance.getField();
-      AccessColumn annotation = field.getAnnotation(AccessColumn.class);
-      int orderColumn = annotation.column();
-      Object value = fieldAndInstance.getValueFromInstance();
-      // Meter el Object, valor del campo segun su orden
-      rowData[orderColumn] = value;
-      // Mirar si la anotacion tiene el atributo unique
-      boolean unique = annotation.unique();
-      if (unique) {
-        uniqueIndexesList.add(orderColumn);
-      }
+  public static Database getDataBase(String filePath) {
+    try {
+      File accessFile = new File(filePath);
+      return DatabaseBuilder.open(accessFile);
+    } catch (NullPointerException e) {
+      log.error("Ubicación del archivo nula o no válida: {} : {}", filePath, e.getMessage());
+    } catch (IOException e) {
+      log.error("Error abriendo el archivo Access {} : {}", filePath, e.getMessage());
     }
-
-    return new AccessRow(rowData, uniqueIndexesList);
+    return null;
   }
 
-  public static List<FieldAndInstance> getFieldsWithAnnotationAccessColumns(
-      Object instance, String accessTable) {
-    List<FieldAndInstance> fieldsFilteredByTable = new ArrayList<>();
-    for (Field field : instance.getClass().getDeclaredFields()) {
-      if (field.isAnnotationPresent(AccessColumn.class)) {
-        AccessColumn annotation = field.getAnnotation(AccessColumn.class);
-        // Comprobar que la anotacion tiene un campo table igual al argumento del metodo
-        if (annotation.name().equals(accessTable)) {
-          Object fieldValue = ReflectionUtil.getFieldValue(instance, field.getName());
-          // Si el field es un objeto Compuesto, llamada recursiva
-          if (fieldValue != null
-              && !field.getType().isPrimitive()
-              && !field.getType().equals(String.class)
-              && !field.getType().getName().startsWith("java")) {
-            // Llamada recursiva
-            fieldsFilteredByTable.addAll(
-                getFieldsWithAnnotationAccessColumns(fieldValue, accessTable));
-          }
-          // Dato primitivo
-          else {
-            FieldAndInstance fieldAndInstance = new FieldAndInstance(field, instance);
-            fieldsFilteredByTable.add(fieldAndInstance);
-          }
-        }
-      }
+  public static Table getTable(Database db, String tableName) {
+    if (db == null) {
+      log.warn("Base de datos nula, no se puede obtener la tabla {}", tableName);
+      return null;
     }
-    return fieldsFilteredByTable;
+
+    try {
+      return db.getTable(tableName);
+    } catch (IOException e) {
+      log.error("Error al obtener la tabla {} : {}", tableName, e.getMessage());
+    }
+    return null;
+  }
+
+  public static List<String> getColumnNames(Table table) {
+    if (table == null) {
+      log.warn("Tabla nula al intentar obtener los nombres de columna");
+      return Collections.emptyList();
+    }
+
+    return table.getColumns().stream().map(Column::getName).toList();
+  }
+
+  public static boolean existsTableWithColumns(
+      Database db, String tableName, List<String> expectedColumnNames) {
+    if (db == null) {
+      log.warn("Base de datos nula al verificar existencia de tabla {}", tableName);
+      return false;
+    }
+
+    Table table = getTable(db, tableName);
+    if (table == null) return false;
+
+    Set<String> actualColumnNames =
+        table.getColumns().stream().map(Column::getName).collect(Collectors.toSet());
+
+    return actualColumnNames.containsAll(expectedColumnNames);
   }
 }
