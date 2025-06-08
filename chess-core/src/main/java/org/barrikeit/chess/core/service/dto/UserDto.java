@@ -6,39 +6,24 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.HashSet;
+import java.util.Set;
 import lombok.*;
 import org.barrikeit.chess.core.util.validators.Alphanumeric;
 import org.barrikeit.chess.core.util.validators.Password;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder(toBuilder = true)
-public class UserDto extends GenericDto {
-
-  private Long id;
-
-  @NotEmpty @Alphanumeric private String username;
-
-  @Password private String password;
-
-  @NotEmpty @Email private String email;
-
-  @NotNull private boolean enabled;
-
-  @NotNull private boolean banned;
-
-  @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
-  private LocalDateTime banDate;
-
-  @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
-  private LocalDateTime loginDate;
-
-  @NotNull private Integer loginAttempts;
-
-  @Valid private HashSet<RoleDto> roles;
+public record UserDto(
+    Long id,
+    @NotEmpty @Alphanumeric String username,
+    @Password String password,
+    @NotEmpty @Email String email,
+    @NotNull boolean enabled,
+    @NotNull boolean banned,
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss") LocalDateTime banDate,
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss") LocalDateTime loginDate,
+    @NotNull Integer loginAttempts,
+    @Valid Set<RoleDto> roles)
+    implements GenericDto {
 
   @Override
   public String toString() {

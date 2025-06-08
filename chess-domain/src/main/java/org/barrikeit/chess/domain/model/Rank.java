@@ -1,4 +1,4 @@
-package org.barrikeit.chess.domain.entities;
+package org.barrikeit.chess.domain.model;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
@@ -8,13 +8,12 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.io.Serial;
 import java.util.Objects;
-import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import org.barrikeit.chess.domain.entities.base.GenericCodeEntity;
+import org.barrikeit.chess.domain.model.base.GenericCodeEntity;
 import org.barrikeit.chess.domain.util.constants.EntityConstants;
 
 @Getter
@@ -23,34 +22,25 @@ import org.barrikeit.chess.domain.util.constants.EntityConstants;
 @AllArgsConstructor
 @SuperBuilder(toBuilder = true)
 @Entity
-@Table(name = EntityConstants.LOCATIONS)
+@Table(name = EntityConstants.RANKS)
 @AttributeOverride(
     name = EntityConstants.ID,
-    column = @Column(name = EntityConstants.ID_LOCATION, nullable = false))
+    column = @Column(name = EntityConstants.ID_RANK, nullable = false))
 @AttributeOverride(
     name = EntityConstants.CODE,
-    column = @Column(name = EntityConstants.CODE_LOCATION, nullable = false))
-public class Location extends GenericCodeEntity<Long, UUID> {
+    column = @Column(name = EntityConstants.CODE_RANK, nullable = false, length = 2))
+public class Rank extends GenericCodeEntity<Long, String> {
   @Serial private static final long serialVersionUID = 1L;
 
   @NotNull
-  @Size(max = 255)
-  @Column(name = "location", nullable = false)
+  @Size(max = 50)
+  @Column(name = "rank", nullable = false, length = 50)
   private String name;
-
-  @NotNull
-  @Size(max = 255)
-  @Column(name = "country", nullable = false)
-  private String country;
-
-  @Size(max = 255)
-  @Column(name = "city")
-  private String city;
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof Location e)) return false;
+    if (!(o instanceof Rank e)) return false;
     if (!super.equals(o)) return false;
 
     return Objects.equals(code, e.code) && Objects.equals(name, e.name);
@@ -65,6 +55,6 @@ public class Location extends GenericCodeEntity<Long, UUID> {
 
   @Override
   public String toString() {
-    return "Location{" + "code='" + code + '\'' + '}';
+    return "Rank{" + "code='" + code + '\'' + '}';
   }
 }

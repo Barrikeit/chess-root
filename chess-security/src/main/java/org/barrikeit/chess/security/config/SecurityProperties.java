@@ -12,9 +12,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class SecurityProperties {
 
   private CorsProperties cors;
-  private AppValidatorFilterProperties appValidatorFilter;
   private JwtProperties jwt;
-  private CookieProperties cookie;
+  private AppValidatorFilterProperties appValidatorFilter;
 
   @Getter
   @Setter
@@ -40,15 +39,6 @@ public class SecurityProperties {
 
   @Getter
   @Setter
-  public static class AppValidatorFilterProperties {
-    private String appSelfName;
-    private String appHeaderName;
-    private Boolean appHeaderNameValidationFilter;
-    private String appSecurityName;
-  }
-
-  @Getter
-  @Setter
   public static class JwtProperties {
     @NotBlank String issuer;
     @NotBlank String secret;
@@ -62,12 +52,10 @@ public class SecurityProperties {
 
   @Getter
   @Setter
-  public static class CookieProperties {
-    private boolean httpOnly;
-    private boolean secure;
-    private String path;
-    private String domain;
-    private Integer maxAge;
-    private String samesite;
+  public static class AppValidatorFilterProperties {
+    private String appSelfName;
+    private String appHeaderName;
+    private Boolean appHeaderNameValidationFilter;
+    private String appSecurityName;
   }
 }

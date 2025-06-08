@@ -2,7 +2,7 @@ package org.barrikeit.chess.domain.repository;
 
 import java.util.Optional;
 import java.util.UUID;
-import org.barrikeit.chess.domain.entities.User;
+import org.barrikeit.chess.domain.model.User;
 import org.barrikeit.chess.domain.repository.base.GenericCodeRepository;
 import org.springframework.stereotype.Repository;
 

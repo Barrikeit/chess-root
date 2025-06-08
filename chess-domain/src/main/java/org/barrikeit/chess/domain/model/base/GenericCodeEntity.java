@@ -1,4 +1,4 @@
-package org.barrikeit.chess.domain.entities.base;
+package org.barrikeit.chess.domain.model.base;
 
 import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.NotNull;

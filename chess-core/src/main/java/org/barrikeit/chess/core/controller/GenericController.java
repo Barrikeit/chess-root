@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.barrikeit.chess.core.service.GenericService;
 import org.barrikeit.chess.core.service.dto.GenericDto;
-import org.barrikeit.chess.domain.entities.base.GenericEntity;
+import org.barrikeit.chess.domain.model.base.GenericEntity;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.*;
 /**
  * <b>Generic Controller Class</b>
  *
- * <p>This abstract class provides common RESTful endpoint implementations for managing entities. It
+ * <p>This abstract class provides common RESTful endpoint implementations for managing model. It
  * relies on a {@link GenericService} to handle business logic and data access. This controller is
- * designed to work with entities that extend {@link GenericEntity} and their corresponding DTOs
+ * designed to work with model that extend {@link GenericEntity} and their corresponding DTOs
  * that extend {@link GenericDto}.
  *
  * @param <E> the entity type that extends {@link GenericEntity}.

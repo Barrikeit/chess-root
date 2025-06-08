@@ -8,7 +8,7 @@ import org.barrikeit.chess.core.service.dto.GenericDto;
 import org.barrikeit.chess.core.service.mapper.GenericMapper;
 import org.barrikeit.chess.core.util.constants.ExceptionConstants;
 import org.barrikeit.chess.core.util.exceptions.NotFoundException;
-import org.barrikeit.chess.domain.entities.base.GenericEntity;
+import org.barrikeit.chess.domain.model.base.GenericEntity;
 import org.barrikeit.chess.domain.repository.base.GenericRepository;
 import org.barrikeit.chess.domain.util.constants.EntityConstants;
 import org.springframework.data.domain.Sort;
@@ -18,8 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
  * <b>Generic Service Class</b>
  *
  * <p>This abstract class provides a generic implementation of service operations for managing
- * entities and their corresponding DTOs. It interacts with a {@link GenericRepository} for data
- * access and uses a {@link GenericMapper} for object mapping between entities and DTOs.
+ * model and their corresponding DTOs. It interacts with a {@link GenericRepository} for data
+ * access and uses a {@link GenericMapper} for object mapping between model and DTOs.
  *
  * @param <E> the entity type that extends {@link GenericEntity}.
  * @param <I> the type of the entity's identifier, which must be {@link Serializable}.
@@ -35,7 +35,7 @@ public abstract class GenericService<
   /**
    * Retrieves a list of all DTOs sorted by their identifier.
    *
-   * @return a list of DTOs representing all entities.
+   * @return a list of DTOs representing all model.
    */
   public List<D> findAll() {
     return repository.findAll(Sort.by(Sort.Direction.ASC, EntityConstants.ID)).stream()
@@ -47,26 +47,26 @@ public abstract class GenericService<
    * Retrieves a list of all DTOs sorted by the specified sort criteria.
    *
    * @param sort the sorting criteria.
-   * @return a list of DTOs representing all entities.
+   * @return a list of DTOs representing all model.
    */
   public List<D> findAll(Sort sort) {
     return repository.findAll(sort).stream().map(this.mapper::toDto).toList();
   }
 
   /**
-   * Retrieves a list of all entities sorted by their identifier.
+   * Retrieves a list of all model sorted by their identifier.
    *
-   * @return a list of entities.
+   * @return a list of model.
    */
   public List<E> findAllEntity() {
     return repository.findAll(Sort.by(Sort.Direction.ASC, EntityConstants.ID)).stream().toList();
   }
 
   /**
-   * Retrieves a list of all entities sorted by the specified sort criteria.
+   * Retrieves a list of all model sorted by the specified sort criteria.
    *
    * @param sort the sorting criteria.
-   * @return a list of entities.
+   * @return a list of model.
    */
   public List<E> findAllEntity(Sort sort) {
     return repository.findAll(sort).stream().toList();

@@ -1,4 +1,4 @@
-package org.barrikeit.chess.domain.entities;
+package org.barrikeit.chess.domain.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import org.barrikeit.chess.domain.entities.base.GenericEntity;
+import org.barrikeit.chess.domain.model.base.GenericEntity;
 import org.barrikeit.chess.domain.util.constants.EntityConstants;
 
 @Getter

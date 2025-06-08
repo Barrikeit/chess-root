@@ -7,7 +7,7 @@ import org.barrikeit.chess.core.service.dto.GenericDto;
 import org.barrikeit.chess.core.service.mapper.GenericMapper;
 import org.barrikeit.chess.core.util.constants.ExceptionConstants;
 import org.barrikeit.chess.core.util.exceptions.NotFoundException;
-import org.barrikeit.chess.domain.entities.base.GenericCodeEntity;
+import org.barrikeit.chess.domain.model.base.GenericCodeEntity;
 import org.barrikeit.chess.domain.repository.base.GenericCodeRepository;
 import org.barrikeit.chess.domain.util.constants.EntityConstants;
 import org.springframework.data.domain.Sort;
@@ -17,8 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
  * <b>Generic Code Service Class</b>
  *
  * <p>This abstract class provides a generic implementation of service operations for managing
- * entities and their corresponding DTOs. It interacts with a {@link GenericCodeRepository} for data
- * access and uses a {@link GenericMapper} for object mapping between entities and DTOs.
+ * model and their corresponding DTOs. It interacts with a {@link GenericCodeRepository} for data
+ * access and uses a {@link GenericMapper} for object mapping between model and DTOs.
  *
  * @param <E> the entity type that extends {@link GenericCodeEntity}.
  * @param <I> the type of the entity's identifier, which must be {@link Serializable}.
@@ -46,7 +46,7 @@ public abstract class GenericCodeService<
   /**
    * Retrieves a list of all DTOs sorted by their code.
    *
-   * @return a list of DTOs representing all entities.
+   * @return a list of DTOs representing all model.
    */
   @Override
   public List<D> findAll() {
@@ -56,9 +56,9 @@ public abstract class GenericCodeService<
   }
 
   /**
-   * Retrieves a list of all entities sorted by their code.
+   * Retrieves a list of all model sorted by their code.
    *
-   * @return a list of entities.
+   * @return a list of model.
    */
   @Override
   public List<E> findAllEntity() {

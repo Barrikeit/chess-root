@@ -1,4 +1,4 @@
-package org.barrikeit.chess.domain.entities;
+package org.barrikeit.chess.domain.model;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
@@ -13,34 +13,35 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import org.barrikeit.chess.domain.entities.base.GenericCodeEntity;
+import org.barrikeit.chess.domain.model.base.GenericCodeEntity;
 import org.barrikeit.chess.domain.util.constants.EntityConstants;
 
+@SuperBuilder(toBuilder = true)
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@SuperBuilder(toBuilder = true)
 @Entity
-@Table(name = EntityConstants.RANKS)
+@Table(name = EntityConstants.MODULES)
 @AttributeOverride(
     name = EntityConstants.ID,
-    column = @Column(name = EntityConstants.ID_RANK, nullable = false))
+    column = @Column(name = EntityConstants.ID_MODULE, nullable = false))
 @AttributeOverride(
     name = EntityConstants.CODE,
-    column = @Column(name = EntityConstants.CODE_RANK, nullable = false, length = 2))
-public class Rank extends GenericCodeEntity<Long, String> {
+    column =
+        @Column(name = EntityConstants.CODE_MODULE, length = 3, nullable = false, unique = true))
+public class Module extends GenericCodeEntity<Integer, String> {
   @Serial private static final long serialVersionUID = 1L;
 
+  @Size(max = 200)
   @NotNull
-  @Size(max = 50)
-  @Column(name = "rank", nullable = false, length = 50)
+  @Column(name = "module", nullable = false, length = 200)
   private String name;
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof Rank e)) return false;
+    if (!(o instanceof Module e)) return false;
     if (!super.equals(o)) return false;
 
     return Objects.equals(code, e.code) && Objects.equals(name, e.name);
@@ -55,6 +56,6 @@ public class Rank extends GenericCodeEntity<Long, String> {
 
   @Override
   public String toString() {
-    return "Rank{" + "code='" + code + '\'' + '}';
+    return "Module{" + "code='" + code + '\'' + '}';
   }
 }

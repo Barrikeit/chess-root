@@ -8,7 +8,7 @@ import org.barrikeit.chess.core.service.mapper.GenericMapper;
 import org.barrikeit.chess.core.util.constants.ExceptionConstants;
 import org.barrikeit.chess.core.util.exceptions.NotFoundException;
 import org.barrikeit.chess.core.util.filter.BaseFilter;
-import org.barrikeit.chess.domain.entities.base.GenericCodeEntity;
+import org.barrikeit.chess.domain.model.base.GenericCodeEntity;
 import org.barrikeit.chess.domain.repository.base.GenericCodeRepository;
 
 @Log4j2

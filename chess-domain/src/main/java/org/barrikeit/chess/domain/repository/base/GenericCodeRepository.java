@@ -2,13 +2,13 @@ package org.barrikeit.chess.domain.repository.base;
 
 import java.io.Serializable;
 import java.util.Optional;
-import org.barrikeit.chess.domain.entities.base.GenericCodeEntity;
+import org.barrikeit.chess.domain.model.base.GenericCodeEntity;
 import org.springframework.data.repository.NoRepositoryBean;
 
 /**
  * <b>Generic Code Repository Interface</b>
  *
- * <p>This interface serves as a base repository for generic entities with code, extending from
+ * <p>This interface serves as a base repository for generic model with code, extending from
  * GenericRepository. It provides standard data access methods for any entity type that extends
  * {@link GenericCodeEntity}.
  *

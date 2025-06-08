@@ -1,19 +1,18 @@
-package org.barrikeit.chess.domain.entities;
+package org.barrikeit.chess.domain.model;
 
-import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.io.Serial;
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import org.barrikeit.chess.domain.entities.base.GenericCodeEntity;
+import org.barrikeit.chess.domain.model.base.GenericCodeEntity;
 import org.barrikeit.chess.domain.util.constants.EntityConstants;
 
 @SuperBuilder(toBuilder = true)
@@ -22,26 +21,32 @@ import org.barrikeit.chess.domain.util.constants.EntityConstants;
 @Getter
 @Setter
 @Entity
-@Table(name = EntityConstants.MODULES)
+@Table(name = EntityConstants.ROLES)
 @AttributeOverride(
     name = EntityConstants.ID,
-    column = @Column(name = EntityConstants.ID_MODULE, nullable = false))
+    column = @Column(name = EntityConstants.ID_ROLE, nullable = false))
 @AttributeOverride(
     name = EntityConstants.CODE,
-    column =
-        @Column(name = EntityConstants.CODE_MODULE, length = 3, nullable = false, unique = true))
-public class Module extends GenericCodeEntity<Integer, String> {
+    column = @Column(name = EntityConstants.CODE_ROLE, length = 2, nullable = false, unique = true))
+public class Role extends GenericCodeEntity<Integer, String> {
   @Serial private static final long serialVersionUID = 1L;
 
-  @Size(max = 200)
   @NotNull
-  @Column(name = "module", nullable = false, length = 200)
+  @Size(max = 50)
+  @Column(name = "role", length = 50, nullable = false)
   private String name;
+
+  @ManyToMany
+  @JoinTable(
+      name = "role_modules",
+      joinColumns = @JoinColumn(name = "id_role"),
+      inverseJoinColumns = @JoinColumn(name = "id_module"))
+  private Set<Module> modules = new LinkedHashSet<>();
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof Module e)) return false;
+    if (!(o instanceof Role e)) return false;
     if (!super.equals(o)) return false;
 
     return Objects.equals(code, e.code) && Objects.equals(name, e.name);
@@ -50,12 +55,12 @@ public class Module extends GenericCodeEntity<Integer, String> {
   @Override
   public int hashCode() {
     int result = super.hashCode();
-    result = 31 * result + (code != null ? code.hashCode() : 0);
+    result = 31 * result + (id != null ? id.hashCode() : 0);
     return result;
   }
 
   @Override
   public String toString() {
-    return "Module{" + "code='" + code + '\'' + '}';
+    return "Role{" + "code=" + code + '}';
   }
 }

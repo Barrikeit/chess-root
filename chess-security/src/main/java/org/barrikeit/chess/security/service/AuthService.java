@@ -15,7 +15,7 @@ import org.barrikeit.chess.core.util.constants.ExceptionConstants;
 import org.barrikeit.chess.core.util.exceptions.BadRequestException;
 import org.barrikeit.chess.core.util.exceptions.NotFoundException;
 import org.barrikeit.chess.core.util.exceptions.UnExpectedException;
-import org.barrikeit.chess.domain.entities.User;
+import org.barrikeit.chess.domain.model.User;
 import org.barrikeit.chess.security.model.domain.BasicUserDetails;
 import org.barrikeit.chess.security.model.domain.Jwt;
 import org.barrikeit.chess.security.model.domain.JwtAuth;
@@ -48,7 +48,6 @@ public class AuthService<S extends Session> {
   private final JwtDecoder jwtDecoder;
   private final JwtProvider jwtProvider;
   private final ObjectMapper objectMapper;
-  private final CookieService cookieService;
   private final SessionService<S> sessionService;
   private final BasicUserDetailsService basicUserDetailsService;
 
@@ -134,8 +133,6 @@ public class AuthService<S extends Session> {
       return objectMapper.readValue(decodedJson, JwtDto.class);
     } catch (JsonProcessingException e) {
       throw new UnExpectedException(ExceptionConstants.DESERIALIZED_COOKIE, e);
-    } finally {
-      cookieService.deleteJwtCookie(response);
     }
   }
 

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import org.barrikeit.chess.core.service.dto.GenericDto;
 import org.barrikeit.chess.core.service.mapper.GenericMapper;
 import org.barrikeit.chess.core.util.filter.BaseFilter;
-import org.barrikeit.chess.domain.entities.base.GenericEntity;
+import org.barrikeit.chess.domain.model.base.GenericEntity;
 import org.barrikeit.chess.domain.repository.base.GenericRepository;
 
 public abstract class GenericFilterService<

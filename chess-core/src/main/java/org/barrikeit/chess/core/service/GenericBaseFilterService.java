@@ -14,7 +14,7 @@ import org.barrikeit.chess.core.util.filter.BaseFilter;
 import org.barrikeit.chess.core.util.filter.BaseFilterBuilder;
 import org.barrikeit.chess.core.util.filter.FilterSpecification;
 import org.barrikeit.chess.core.util.search.SearchCriteria;
-import org.barrikeit.chess.domain.entities.base.GenericEntity;
+import org.barrikeit.chess.domain.model.base.GenericEntity;
 import org.barrikeit.chess.domain.repository.base.GenericRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

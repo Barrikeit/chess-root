@@ -1,7 +1,7 @@
 package org.barrikeit.chess.core.service.mapper;
 
 import org.barrikeit.chess.core.service.dto.UserDto;
-import org.barrikeit.chess.domain.entities.User;
+import org.barrikeit.chess.domain.model.User;
 import org.mapstruct.*;
 
 @Mapper(

@@ -1,10 +1,12 @@
-package org.barrikeit.chess.domain.entities;
+package org.barrikeit.chess.domain.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.io.Serial;
-import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -12,7 +14,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import org.barrikeit.chess.domain.entities.base.GenericCodeEntity;
+import org.barrikeit.chess.domain.model.base.GenericCodeEntity;
 import org.barrikeit.chess.domain.util.constants.EntityConstants;
 
 @Getter
@@ -21,41 +23,34 @@ import org.barrikeit.chess.domain.util.constants.EntityConstants;
 @AllArgsConstructor
 @SuperBuilder(toBuilder = true)
 @Entity
-@Table(name = EntityConstants.EVENTS)
+@Table(name = EntityConstants.LOCATIONS)
 @AttributeOverride(
     name = EntityConstants.ID,
-    column = @Column(name = EntityConstants.ID_EVENT, nullable = false))
+    column = @Column(name = EntityConstants.ID_LOCATION, nullable = false))
 @AttributeOverride(
     name = EntityConstants.CODE,
-    column = @Column(name = EntityConstants.CODE_EVENT, nullable = false))
-public class Event extends GenericCodeEntity<Long, UUID> {
+    column = @Column(name = EntityConstants.CODE_LOCATION, nullable = false))
+public class Location extends GenericCodeEntity<Long, UUID> {
   @Serial private static final long serialVersionUID = 1L;
 
-  @Size(max = 255)
   @NotNull
-  @Column(name = "event", nullable = false)
+  @Size(max = 255)
+  @Column(name = "location", nullable = false)
   private String name;
 
   @NotNull
-  @Column(name = "start_date", nullable = false, columnDefinition = "DATE")
-  private LocalDate startDate;
+  @Size(max = 255)
+  @Column(name = "country", nullable = false)
+  private String country;
 
-  @Column(name = "end_date", columnDefinition = "DATE")
-  private LocalDate endDate;
-
-  @NotNull
-  @Column(name = "round", nullable = false)
-  private Integer round;
-
-  @NotNull
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "id_location", referencedColumnName = "id_location", nullable = false)
-  private Location location;
+  @Size(max = 255)
+  @Column(name = "city")
+  private String city;
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof Event e)) return false;
+    if (!(o instanceof Location e)) return false;
     if (!super.equals(o)) return false;
 
     return Objects.equals(code, e.code) && Objects.equals(name, e.name);
@@ -70,6 +65,6 @@ public class Event extends GenericCodeEntity<Long, UUID> {
 
   @Override
   public String toString() {
-    return "Event{" + "code='" + code + '\'' + '}';
+    return "Location{" + "code='" + code + '\'' + '}';
   }
 }

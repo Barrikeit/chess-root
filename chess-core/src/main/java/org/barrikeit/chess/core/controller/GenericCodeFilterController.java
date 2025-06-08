@@ -7,7 +7,7 @@ import org.barrikeit.chess.core.service.GenericCodeFilterService;
 import org.barrikeit.chess.core.service.dto.GenericDto;
 import org.barrikeit.chess.core.util.filter.BaseFilter;
 import org.barrikeit.chess.core.util.validators.Params;
-import org.barrikeit.chess.domain.entities.base.GenericCodeEntity;
+import org.barrikeit.chess.domain.model.base.GenericCodeEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;

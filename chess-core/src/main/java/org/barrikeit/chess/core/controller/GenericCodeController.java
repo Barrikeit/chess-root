@@ -4,7 +4,7 @@ import java.io.Serializable;
 import lombok.extern.log4j.Log4j2;
 import org.barrikeit.chess.core.service.GenericCodeService;
 import org.barrikeit.chess.core.service.dto.GenericDto;
-import org.barrikeit.chess.domain.entities.base.GenericCodeEntity;
+import org.barrikeit.chess.domain.model.base.GenericCodeEntity;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.*;
 /**
  * <b>Generic Code Controller Class</b>
  *
- * <p>This abstract class provides common RESTful endpoint implementations for managing entities. It
+ * <p>This abstract class provides common RESTful endpoint implementations for managing model. It
  * relies on a {@link GenericCodeService} to handle business logic and data access. This controller
- * is designed to work with entities that extend {@link GenericCodeEntity} and their corresponding
+ * is designed to work with model that extend {@link GenericCodeEntity} and their corresponding
  * DTOs that extend {@link GenericDto}.
  *
  * @param <E> the entity type that extends {@link GenericCodeEntity}.

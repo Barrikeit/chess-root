@@ -1,4 +1,4 @@
-package org.barrikeit.chess.domain.entities;
+package org.barrikeit.chess.domain.model;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
@@ -13,7 +13,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import org.barrikeit.chess.domain.entities.base.GenericCodeEntity;
+import org.barrikeit.chess.domain.model.base.GenericCodeEntity;
 import org.barrikeit.chess.domain.util.constants.EntityConstants;
 
 @Getter
@@ -22,25 +22,30 @@ import org.barrikeit.chess.domain.util.constants.EntityConstants;
 @AllArgsConstructor
 @SuperBuilder(toBuilder = true)
 @Entity
-@Table(name = EntityConstants.COLORS)
+@Table(name = EntityConstants.GAME_STATES)
 @AttributeOverride(
     name = EntityConstants.ID,
-    column = @Column(name = EntityConstants.ID_COLOR, nullable = false))
+    column = @Column(name = EntityConstants.ID_GAME_STATE, nullable = false))
 @AttributeOverride(
     name = EntityConstants.CODE,
-    column = @Column(name = EntityConstants.CODE_COLOR, nullable = false, length = 1))
-public class Color extends GenericCodeEntity<Long, String> {
+    column = @Column(name = EntityConstants.CODE_GAME_STATE, nullable = false))
+public class GameState extends GenericCodeEntity<Long, String> {
   @Serial private static final long serialVersionUID = 1L;
 
-  @Size(max = 5)
+  @Size(max = 255)
   @NotNull
-  @Column(name = "color", nullable = false, length = 5)
+  @Column(name = "game_state", nullable = false)
   private String name;
+
+  @Size(max = 255)
+  @NotNull
+  @Column(name = "observations", nullable = false)
+  private String observations;
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof Color e)) return false;
+    if (!(o instanceof GameState e)) return false;
     if (!super.equals(o)) return false;
 
     return Objects.equals(code, e.code) && Objects.equals(name, e.name);
@@ -55,6 +60,6 @@ public class Color extends GenericCodeEntity<Long, String> {
 
   @Override
   public String toString() {
-    return "Color{" + "code='" + code + '\'' + '}';
+    return "GameState{" + "code='" + code + '\'' + '}';
   }
 }

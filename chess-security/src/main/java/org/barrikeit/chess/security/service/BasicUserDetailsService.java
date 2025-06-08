@@ -2,9 +2,9 @@ package org.barrikeit.chess.security.service;
 
 import java.util.*;
 import lombok.AllArgsConstructor;
-import org.barrikeit.chess.domain.entities.Module;
-import org.barrikeit.chess.domain.entities.Role;
-import org.barrikeit.chess.domain.entities.User;
+import org.barrikeit.chess.domain.model.Module;
+import org.barrikeit.chess.domain.model.Role;
+import org.barrikeit.chess.domain.model.User;
 import org.barrikeit.chess.domain.repository.UserRepository;
 import org.barrikeit.chess.core.service.dto.UserDto;
 import org.barrikeit.chess.core.service.mapper.UserMapper;

@@ -1,6 +1,6 @@
 package org.barrikeit.chess.domain.repository;
 
-import org.barrikeit.chess.domain.entities.Color;
+import org.barrikeit.chess.domain.model.Color;
 import org.barrikeit.chess.domain.repository.base.GenericCodeRepository;
 import org.springframework.stereotype.Repository;
 

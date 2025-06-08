@@ -22,7 +22,7 @@ import org.barrikeit.chess.core.util.constants.ExceptionConstants;
 import org.barrikeit.chess.core.util.exceptions.FieldValueException;
 import org.barrikeit.chess.core.util.exceptions.NotFoundException;
 import org.barrikeit.chess.core.util.exceptions.UnExpectedException;
-import org.barrikeit.chess.domain.entities.base.GenericEntity;
+import org.barrikeit.chess.domain.model.base.GenericEntity;
 import org.springframework.util.ReflectionUtils;
 
 @Log4j2
