@@ -30,6 +30,7 @@ public class ExceptionConstants {
   public static final String ERROR_DESCARGA_EXCEL = "error.msg.excel.descarga";
   public static final String ERROR_COLUMNS_NUMBER = "error.msg.excel.columns.number";
   public static final String ERROR_COLUMN_NAME = "error.msg.excel.column.name";
+  public static final String ERROR_REQUEST_MUST_NOT_BE_NULL = "";
   public static final String ERROR_MAX_SESSIONS_CONCURRENT_USER = "";
   public static final String ERROR_USER_BANNED = "";
   public static final String ERROR_USER_NOT_ENABLED = "";
