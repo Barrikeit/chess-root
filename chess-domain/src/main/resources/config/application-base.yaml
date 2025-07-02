@@ -1,0 +1,43 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/chess
+    driverClassName: org.postgresql.Driver
+    username: user
+    password: "pass"
+    hikari:
+      pool-name: Hikari
+      auto-commit: false
+      minimum-idle: 5
+      maximum-pool-size: 10
+      datasource-properties:
+        includeSynonyms: false
+  jpa:
+    database: POSTGRESQL
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: false
+    open-in-view: false
+    properties:
+      hibernate:
+        synonyms: false
+        format_sql: true
+        show_sql: true
+        default_schema: chess # or set the search_path in the database for the user
+        hbm2ddl:
+          auto: none #validate | create-only | drop | update | create-drop | none
+        generate_statistics: false
+        enable_lazy_load_no_trans: true
+  session:
+    store-type: jdbc
+    jdbc:
+      initializer:
+        enabled: true
+      table-name: SPRING_SESSION
+      initialize-schema: never
+
+# net start postgresql-x64-17
+# docker pull postgres:14.4-alpine
+# docker run -d --name postgres_chess -e POSTGRES_USER=user -e POSTGRES_PASSWORD=pass -e POSTGRES_DB=chess -p 2345:5432 postgres:14.4-alpine
+# docker ps
+# docker exec -it postgres_chess psql -U user -d chess
+# CREATE SCHEMA IF NOT EXISTS chess;
+# ALTER ROLE "user" SET search_path TO chess, public;

@@ -1,0 +1,21 @@
+package org.barrikeit.chess.domain.repository.base;
+
+import java.io.Serializable;
+import org.barrikeit.chess.domain.model.base.GenericEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.repository.NoRepositoryBean;
+
+/**
+ * <b>Generic Repository Interface</b>
+ *
+ * <p>This interface serves as a base repository for generic model, extending Spring Data's
+ * JpaRepository and JpaSpecificationExecutor. It provides standard data access methods for any
+ * entity type that extends {@link GenericEntity}.
+ *
+ * @param <E> the entity type that extends {@link GenericEntity}.
+ * @param <I> the type of the entity's identifier, which must be {@link Serializable}.
+ */
+@NoRepositoryBean
+public interface GenericRepository<E extends GenericEntity<I>, I extends Serializable>
+    extends JpaRepository<E, I>, JpaSpecificationExecutor<E> {}
